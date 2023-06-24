@@ -1,12 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: first-app
+  name: web-app
 spec:
   selector:
-    app: first-app
+    app: web-app
   type: NodePort
   ports:
   - protocol: TCP
-    port: 5000
-    targetPort: 5000
+    port: 8080
+    targetPort: 8080

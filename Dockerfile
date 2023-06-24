@@ -1,18 +1,12 @@
-FROM ubuntu:16.04
+FROM registry.access.redhat.com/ubi8/python-39
+ENV PORT 8080
+EXPOSE 8080
+WORKDIR /usr/src/app
 
-MAINTAINER Matheus Carino "matheuscarino@gmail.com"
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN apt-get update -y && \
-    apt-get install -y python-pip python-dev
+COPY . .
 
-COPY ./requirements.txt /app/requirements.txt
-
-WORKDIR /app
-
-RUN pip install -r requirements.txt
-
-COPY . /app
-
-ENTRYPOINT [ "python" ]
-
-CMD [ "src/app.py" ]
+ENTRYPOINT ["python"]
+CMD ["app.py"]
